@@ -1,0 +1,18 @@
+diff --git i/src/nsterm.m w/src/nsterm.m
+index 003aadb9782..687045dff78 100644
+--- i/src/nsterm.m
++++ w/src/nsterm.m
+@@ -4939,10 +4939,11 @@ Function modeled after x_draw_glyph_string_box ().
+     return thread_select (pselect, nfds, readfds, writefds, exceptfds,
+ 			  timeout, sigmask);
+ 
++  /* https://debbugs.gnu.org/cgi/bugreport.cgi?bug=75275#83 */
+   if (![NSThread isMainThread]
+       || (timeout && timeout->tv_sec == 0 && timeout->tv_nsec == 0))
+-    thread_select (pselect, nfds, readfds, writefds,
+-		   exceptfds, timeout, sigmask);
++    return thread_select (pselect, nfds, readfds, writefds, exceptfds,
++		          timeout, sigmask);
+   else
+     {
+       struct timespec t = {0, 0};
