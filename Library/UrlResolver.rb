@@ -1,4 +1,4 @@
-TAP_OWNER = "d12frosted"
+TAP_OWNER = "lygaret"
 TAP_REPO = "emacs-plus"
 
 class UrlResolver
